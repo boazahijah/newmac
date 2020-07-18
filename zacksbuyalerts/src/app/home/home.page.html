@@ -1,0 +1,165 @@
+<!--<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>HOME</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+    Details Page forward
+</ion-content> -->
+
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>HOME</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+  <ion-content class="card-background-page" *ngIf="industries || industries.length > 0">
+
+
+    <ion-grid>
+      <ion-row (click)="navigateToZacksRankListAll()">
+        <ion-col size="10">
+          <ion-label style="font-size:12pt;font-color:#464646">
+          <b><p>  View Stocks based on Zacks Ranks</p></b>
+          </ion-label>
+        </ion-col>
+        <ion-col size="2" style="font-size:14pt;font-color:#464646">
+        <b>  <ion-icon name="ios-arrow-forward" style="float:right;"></ion-icon></b>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+
+    <ion-slides *ngIf="this.zacksRanks || this.zacksRanks.length > 0" pager slidesPerView="1" spaceBetween="40" [options]="slideOptionsZacksRank" pager="true" #slider (ionSlidesDidLoad)="slidesDidLoad(slider)" >
+      <ion-slide>
+        <ion-card  (click)="navigateToZacksRankListAll()" routerDirection="root">
+              <img  src="{{viewalliconurl}}">
+       <div class="card-title">View all Ranks</div>
+     </ion-card>
+      </ion-slide>
+
+
+       <ion-slide *ngFor="let p of this.zacksRanks" >
+
+         <ion-card  (click)="navigateToZacksRankList(p.rank)" routerDirection="root">
+                 <img  src="{{p.url}}">
+        <div class="card-title">Zacks {{p.rank}}</div>
+
+     </ion-card>
+       </ion-slide>
+    </ion-slides>
+
+
+
+    <div *ngIf="industries || industries.length > 0">
+
+      <ion-grid>
+        <ion-row (click)="navigateToZacksRankListAll()">
+          <ion-col size="10">
+            <ion-label style="font-size:12pt;font-color:#464646">
+            <b><p>  View Stocks based on industries</p></b>
+            </ion-label>
+          </ion-col>
+          <ion-col size="2" style="font-size:14pt;font-color:#464646">
+          <b>  <ion-icon name="ios-arrow-forward" style="float:right;"></ion-icon></b>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+  <ion-slides *ngIf="industries || industries.length > 0" pager slidesPerView="2" spaceBetween="40" [options]="slideOptions" pager="true" #slider (ionSlidesDidLoad)="slidesDidLoad(slider)" >
+    <ion-slide>
+      <ion-card  (click)="navigateToZacksRankListAll()" routerDirection="root">
+            <img  src="{{viewalliconurl2}}">
+     <div class="card-title">View all Industries</div>
+   </ion-card>
+    </ion-slide>
+     <ion-slide *ngFor="let p of industries" >
+      <ion-card  (click)="navigateToZacksRankThroughIndustry(p.industryName)" routerDirection="root">
+     <img src="{{p.image}}">
+     <div class="card-title">{{p.industryName}}</div>
+  </ion-card>
+     </ion-slide>
+  </ion-slides>
+
+
+  <ion-grid>
+    <ion-row (click)="navigateToZacksRankChanges()">
+      <ion-col size="10">
+        <ion-label style="font-size:12pt;font-color:#464646">
+        <b><p>  Recent zacks rank changes updated {{recentchangetext}} </p></b>
+        </ion-label>
+      </ion-col>
+      <ion-col size="2" style="font-size:14pt;font-color:#464646">
+      <b>  <ion-icon name="ios-arrow-forward" style="float:right;"></ion-icon></b>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+<ion-list>
+
+  <ion-item *ngFor="let item of changeTickers;let i = index;">
+    <ion-avatar slot="start" style="size:50%;">
+
+  <img src={{item.logo}} *ngIf=item.logo (click)="navigateToStockDetails(item.tickerName,item.zacksRank,item.industry,item.lastprice,item.logo,item.companyName)"/>
+  <img src="{{errorLogo}}" *ngIf=!item.logo (click)="navigateToStockDetails(item.tickerName,item.zacksRank,item.industry,item.lastprice,item.logo,item.companyName)"/>
+  </ion-avatar>
+  <ion-grid>
+  <ion-row>
+  <ion-col>
+    <ion-label>
+        <h2 style="display:inline-block;" (click)="navigateToStockDetails(item.tickerName,item.zacksRank,item.industry,item.lastprice,item.logo,item.companyName)">
+          {{ item.companyName.length > 25 ? item.companyName.substring(0,25)+"..." : item.companyName }}
+        </h2>
+  <div (click)="navigateToStockDetails(item.tickerName,item.zacksRankNew,item.industry,item.lastprice,item.logo,item.companyName)">
+        <h2 style="display:inline-block;">{{item.tickerName}}</h2>
+        <p style="float:right;display:inline-block;font-size:10pt;"><b>$ {{item.lastprice}}</b></p>
+
+        <div *ngIf="item.status === 'D'">
+        <h3  style="color:#F6826A;font-weight:bold;font-size:8.5pt;">{{item.message}} </h3>
+        </div>
+        <div *ngIf="item.status === 'U'">
+        <h3  style="color:#7D973C;font-weight:bold;font-size:8.5pt;">{{item.message}} </h3>
+        </div>
+
+  </div>
+
+
+    </ion-label>
+  </ion-col>
+  </ion-row>
+  </ion-grid>
+
+    </ion-item>
+    <ion-item lines="none" (click)="navigateToZacksRankChanges();">
+      <ion-label >
+            <h2 class="more" slot="end" >tap here to view all ...</h2>
+      </ion-label>
+    </ion-item>
+
+</ion-list>
+
+
+
+</div>
+
+</ion-content>
+
+<ion-content class="card-background-page" *ngIf="!industries || industries.length == 0" style="padding-top:70%;">
+  <ion-list>
+    <ion-item color="danger" lines="none">
+          <ion-label class="ion-text-wrap message" style="font-size:9pt;font-style:italic;">
+          <ion-icon name="ios-wifi"></ion-icon>
+         &nbsp; Network not available. Please check your network connectivity and try again.
+          </ion-label>
+    </ion-item>
+  </ion-list>
+</ion-content>
+<ion-list>
+  <ion-item>
+  </ion-item>
+</ion-list>

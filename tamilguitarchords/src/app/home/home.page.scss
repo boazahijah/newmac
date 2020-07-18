@@ -1,0 +1,47 @@
+.card-background-page {
+
+  ion-card {
+    border-radius:20px;
+    position: relative;
+    text-align: center;
+    flex-direction: column;
+    width: 100% !important;
+    -webkit-box-orient:horizontal !important;
+  }
+
+  .card-title {
+    position: absolute;
+    top: 36%;
+    font-size: 2.0em;
+    width: 100%;
+    font-weight: bold;
+    color: #fff;
+    background-color:rgba(0,0,0,0.4);
+  }
+
+  .card-subtitle {
+    font-size: 1.5em;
+    position: absolute;
+    top: 52%;
+    width: 100%;
+    color: #fff;
+    background-color:rgba(0,0,0,0.4);
+  }
+  .message{
+    font-size:10pt;
+    font-style: italic;
+  }
+  .message-head{
+    font-size:14pt;
+    font-style: italic;
+  }
+  .message-songname{
+    font-size:10pt !important;
+  }
+  .more{
+    font-size:12pt !important;
+    font-style: italic;
+    float: right;
+  }
+
+}

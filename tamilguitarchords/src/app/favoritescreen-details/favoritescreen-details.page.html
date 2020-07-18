@@ -1,0 +1,166 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+       <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-buttons slot="end" (click)="navigateToHome();">
+      <ion-icon name="home" class="larger" ></ion-icon>
+    </ion-buttons>
+    <ion-title>Song Lyrics / Chords / Videos </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="customfontsize">
+  <super-tabs>
+    <super-tabs-toolbar slot="top">
+      <super-tab-button>
+        <ion-label>Lyrics</ion-label>
+      </super-tab-button>
+      <super-tab-button>
+        <ion-label>Chords</ion-label>
+      </super-tab-button>
+      <super-tab-button>
+        <ion-label>Videos</ion-label>
+      </super-tab-button>
+    </super-tabs-toolbar>
+    <super-tabs-container>
+      <super-tab>
+        <ion-content>
+          <div class="roundedCorners">
+
+
+          <ion-grid>
+            <ion-row>
+              <ion-col>
+                <div class="boldChord">
+                  Song Name
+                </div>
+              </ion-col>
+              <ion-col>
+                <div>
+                  :&nbsp;&nbsp;{{songName}}
+                </div>
+              </ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col>
+                <div class="boldChord">
+                  Song Key
+                </div>
+              </ion-col>
+              <ion-col>
+                <div>
+                  :&nbsp;&nbsp;{{songkey}}
+                </div>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+</div>
+<div class="roundedCorners">
+
+          <ion-grid ng-if="tips != null &&  tips != undefined">
+            <ion-row>
+              <ion-col class="boldChord">
+                <ion-icon  md="ios-bulb"></ion-icon>
+                Tips to play :
+              </ion-col>
+            </ion-row>
+            <ion-row *ngFor="let tip of tips; let i = index;">
+              <ion-col>
+              <i> {{i + 1}} , {{tip.tip}} </i>
+             </ion-col>
+            </ion-row>
+          </ion-grid>
+</div>
+
+<!-- Lyrics -->
+<div class="roundedCornersBody">
+
+<ion-grid>
+<ion-row>
+<ion-col class="boldChord">
+  <ion-icon name="book"></ion-icon>
+Lyrics :
+</ion-col>
+</ion-row>
+
+<div ng-if="pallavi != null &&  pallavi != undefined">
+<ion-row *ngFor="let line of pallavi">
+<ion-col class="spaceBetweenRows customfontsize">
+  <div [innerHTML] = " line ">
+</div>
+
+</ion-col>
+</ion-row>
+</div>
+
+<ion-row>
+<ion-col class="spaceBetweenRows">
+&nbsp;
+</ion-col>
+</ion-row>
+
+
+<div ng-if="saranam != null &&  saranam != undefined">
+<ion-row *ngFor="let line of saranam">
+<ion-col class="spaceBetweenRows customfontsize">
+  <div [innerHTML] = " line "> </div>
+</ion-col>
+</ion-row>
+</div>
+
+
+</ion-grid>
+</div>
+        </ion-content>
+      </super-tab>
+      <super-tab>
+        <ion-content>
+<ion-list>
+  <ion-item color="tertiary" lines="none">
+    <ion-label class="ion-text-wrap message">
+      <ion-icon name="md-albums"></ion-icon>
+      List of chords,  that are used in this song.
+      </ion-label>
+</ion-item>
+  <ion-item *ngFor="let chord of chordDetails">
+    <ion-card class="fixedCardSize">
+      <ion-card-header color="tertiary">
+        <ion-card-title>{{chord.chordname}}</ion-card-title>
+      </ion-card-header>
+      <img src="{{chord.imageData}}"/>
+    </ion-card>
+  </ion-item>
+
+</ion-list>
+        </ion-content>
+      </super-tab>
+
+
+
+      <super-tab>
+          <ion-content>
+          <ion-list>
+            <ion-item color="tertiary" lines="none">
+              <ion-label class="ion-text-wrap message">
+                <ion-icon name="videocam"></ion-icon>
+                 List of youtube videos that can help you play this song.
+              </ion-label>
+
+            </ion-item>
+            <ion-item *ngFor="let video of videoDetails" (click)="openYoutubeVideo(video.videoid)">
+              <ion-thumbnail slot="start">
+                <img src="https://img.youtube.com/vi/{{video.videoid}}/1.jpg">
+              </ion-thumbnail>
+              <ion-label>
+                <h3>{{video.videotitle}}</h3>
+              </ion-label>
+            </ion-item>
+          </ion-list>
+
+
+          </ion-content>
+      </super-tab>
+    </super-tabs-container>
+  </super-tabs>
+</ion-content>

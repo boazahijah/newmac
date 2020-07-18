@@ -1,0 +1,116 @@
+.spaceBetweenRows{
+  margin-top: 4%;
+}
+.boldChord{
+  font-weight: bold !important;
+  font-style: italic;
+}
+
+.customfontsize{
+  font-size: 15px;
+}
+
+.chordImageSize{
+  height: 50%;
+  width: 50%;
+}
+ion-card{
+
+}
+
+ion-card {
+  background-color: rgb(83, 173, 47); // black
+  font-style: italic;
+}
+
+.thumb {
+  display: flex;
+  flex-wrap: wrap;
+  list-style: none;
+}
+
+.thumb li {
+  width: 193px;
+}
+
+.thumb li ~ li {
+  margin-left: 20px;
+}
+
+.thumb  {
+  padding: 10px 0;
+}
+
+.overlay {
+  position: relative;
+}
+
+.overlay .thumbnail {
+  display: block;
+}
+
+.larger {
+    font-size: 25px;
+    padding-right: 12px;
+}
+
+
+.overlay {
+  position: relative; z-index: 2;
+  right: 3px; bottom: 3px;
+  padding: 2px 5px;
+  background-color: rgba(0, 0, 0, 0.6);
+  color: white;
+}
+
+.overlay .playWrapper {
+  opacity: 10;
+  position: absolute; z-index: 1;
+  top: 0;
+  width: 192px; height: 109px;
+}
+
+.playWrapper .playBtn {
+  position: absolute; z-index: 2;
+  width: 50px; height: 50px;
+  left: 0; right: 0; top: 0; bottom: 0; margin: auto; /* center */
+}
+
+.thumb .overlay:hover .playWrapper {
+  opacity: 1;
+}
+.roundedCorners{
+  background-color: #f5e5c6;
+  border-radius: 25px;
+border-style: solid;
+border-width: thin;
+border-color:#f5e5c6;
+padding: 8px;
+width: 95%;
+top:2%;
+margin-right: 2%;
+margin-left:2%;
+margin-top:2%;
+}
+
+.roundedCornersBody{
+  background-color: #f5e5c6;
+  border-radius: 25px;
+border-style: solid;
+border-width: thin;
+border-color:#f5e5c6;
+padding: 8px;
+width: 100%;
+top:2%;
+margin-top:2%;
+
+}
+.fixedCardSize{
+  width:60% !important;
+  margin-left: 12%;
+}
+
+.message{
+  font-size:11pt;
+  font-style: italic;
+}

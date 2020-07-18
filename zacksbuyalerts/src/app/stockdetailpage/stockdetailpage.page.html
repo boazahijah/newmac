@@ -1,0 +1,534 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+       <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title> Stock basic financials </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="customfontsize" no-bounce>
+  <super-tabs (tabChange)="onTabChange($event)">
+    <super-tabs-toolbar slot="top">
+      <super-tab-button>
+        <ion-label>Basic financials</ion-label>
+      </super-tab-button>
+      <super-tab-button>
+        <ion-label>News Sentiments</ion-label>
+      </super-tab-button>
+
+<!--      <super-tab-button>
+        <ion-label>Support/Resistance</ion-label>
+      </super-tab-button>
+      <super-tab-button>
+        <ion-label>News Sentiment</ion-label>
+      </super-tab-button> -->
+  </super-tabs-toolbar>
+    <super-tabs-container>
+      <super-tab>
+        <ion-content>
+          <ion-list>
+            <ion-item lines="none">
+              <ion-avatar slot="start">
+                <img src={{logo}} *ngIf=logo/>
+              <!--  <img src="{{errorLogo}}" *ngIf=!logo/> -->
+      </ion-avatar>
+        <ion-grid>
+          <ion-row>
+            <ion-col>
+              <ion-label>
+                  <h2>
+                    {{ companyname.length > 40 ? companyname.substring(0,40)+"..." : companyname }}
+                    </h2>
+                  <h2 style="display:inline-block;">{{tickerName}}</h2> <p style="float:right;display:inline-block"><b>$ {{lastprice}}</b></p>
+                  <h3>{{rank}}</h3>
+                  <p>{{industry}}</p>
+              </ion-label>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+        </ion-item>
+          </ion-list>
+
+          <ion-grid *ngIf="!this.companyFinancials">
+            <ion-row>
+            <ion-col size="12">
+              Sorry,the data for this ticker is not available at this moment.
+            </ion-col>
+            </ion-row>
+            </ion-grid>
+          <ion-grid *ngIf="this.companyFinancials">
+            <ion-row>
+            <ion-col size="6" *ngIf="this.companyFinancials._52WeekHigh">
+                <ion-label>
+                <p> 52 Week High : &nbsp; {{companyFinancials._52WeekHigh | number:'1.2'}}</p>
+                </ion-label>
+              </ion-col>
+              <ion-col size="6" *ngIf="this.companyFinancials._52WeekLow">
+                <ion-label>
+                <p> 52 Week Low : &nbsp; {{companyFinancials._52WeekLow | number:'1.2'}}</p>
+                </ion-label>
+              </ion-col>
+              <ion-col size="6" *ngIf="this.companyFinancials.beta">
+                <ion-label>
+                <p> beta : &nbsp; {{companyFinancials.beta | number:'1.2'}}</p>
+                </ion-label>
+              </ion-col>
+            </ion-row>
+
+
+            <ion-row>
+              <ion-col size="10">
+                <ion-label style="font-size:12pt;font-color:#464646">
+                <b><p> Support and resistance levels</p></b>
+                </ion-label>
+              </ion-col>
+              <ion-col size="2" style="font-size:14pt;font-color:#464646">
+              <b>  <ion-icon name="ios-arrow-forward" style="float:right;"></ion-icon></b>
+              </ion-col>
+            </ion-row>
+            <ion-row *ngIf="this.companyFinancials.sup1">
+            <ion-col size="3" *ngIf="this.companyFinancials.sup1">
+                <ion-label>
+                <p> Support 1</p>
+                </ion-label>
+              </ion-col>
+              <ion-col size="3" *ngIf="this.companyFinancials.sup1">
+                <ion-label>
+                <p>:&nbsp; {{companyFinancials.sup1 | number:'1.2'}}</p>
+                </ion-label>
+              </ion-col>
+              <ion-col size="3" *ngIf="this.companyFinancials.res1">
+                  <ion-label>
+                  <p> Resistance 1</p>
+                  </ion-label>
+                </ion-col>
+                <ion-col size="3" *ngIf="this.companyFinancials.res1">
+                  <ion-label>
+                  <p>: &nbsp;{{companyFinancials.res1 | number:'1.2'}}</p>
+                  </ion-label>
+                </ion-col>
+
+
+
+                <ion-col size="3" *ngIf="this.companyFinancials.sup2">
+                    <ion-label>
+                    <p> Support 2</p>
+                    </ion-label>
+                  </ion-col>
+                  <ion-col size="3" *ngIf="this.companyFinancials.sup2">
+                    <ion-label>
+                    <p>:&nbsp; {{companyFinancials.sup2 | number:'1.2'}}</p>
+                    </ion-label>
+                  </ion-col>
+                  <ion-col size="3" *ngIf="this.companyFinancials.res2">
+                      <ion-label>
+                      <p> Resistance 2</p>
+                      </ion-label>
+                    </ion-col>
+                    <ion-col size="3" *ngIf="this.companyFinancials.res2">
+                      <ion-label>
+                      <p>:&nbsp; {{companyFinancials.res2 | number:'1.2'}}</p>
+                      </ion-label>
+                    </ion-col>
+
+                    <ion-col size="3" *ngIf="this.companyFinancials.sup3">
+                        <ion-label>
+                        <p> Support 3</p>
+                        </ion-label>
+                      </ion-col>
+                      <ion-col size="3" *ngIf="this.companyFinancials.sup3">
+                        <ion-label>
+                        <p>:&nbsp; {{companyFinancials.sup3 | number:'1.2'}}</p>
+                        </ion-label>
+                      </ion-col>
+                      <ion-col size="3" *ngIf="this.companyFinancials.res3">
+                          <ion-label>
+                          <p> Resistance 3</p>
+                          </ion-label>
+                        </ion-col>
+                        <ion-col size="3" *ngIf="this.companyFinancials.res3">
+                          <ion-label>
+                          <p>:&nbsp;{{companyFinancials.res3 | number:'1.2'}}</p>
+                          </ion-label>
+                        </ion-col>
+
+            </ion-row>
+
+            <ion-row *ngIf="!this.companyFinancials.sup1">
+            <ion-col size="12">
+                <ion-label>
+                <p>Data not found for this ticker</p>
+                </ion-label>
+            </ion-col>
+            </ion-row>
+              <ion-row>
+                <ion-col size="10">
+                  <ion-label style="font-size:12pt;font-color:#464646">
+                  <b><p> High and Low targets</p></b>
+                  </ion-label>
+                </ion-col>
+                <ion-col size="2" style="font-size:14pt;font-color:#464646">
+                <b>  <ion-icon name="ios-arrow-forward" style="float:right;"></ion-icon></b>
+                </ion-col>
+              </ion-row>
+
+              <ion-row *ngIf="this.companyFinancials.targetHigh">
+                <ion-col size="6" *ngIf="this.companyFinancials.targetHigh">
+                    <ion-label>
+                    <p> Target High :&nbsp; {{companyFinancials.targetHigh | number:'1.2'}}</p>
+                    </ion-label>
+                  </ion-col>
+                  <ion-col size="6" *ngIf="this.companyFinancials.targetLow">
+                    <ion-label>
+                    <p>Target Low:&nbsp;{{companyFinancials.targetLow | number:'1.2'}}</p>
+                    </ion-label>
+                  </ion-col>
+                  <ion-col size="6" *ngIf="this.companyFinancials.targetMean">
+                    <ion-label>
+                    <p>Target Mean:&nbsp;{{companyFinancials.targetMean | number:'1.2'}}</p>
+                    </ion-label>
+                  </ion-col>
+                  <ion-col size="6" *ngIf="this.companyFinancials.targetMedian">
+                    <ion-label>
+                    <p>Target Median:&nbsp;{{companyFinancials.targetMedian | number:'1.2'}}</p>
+                    </ion-label>
+                  </ion-col>
+                </ion-row>
+
+                <ion-row *ngIf="!this.companyFinancials.targetHigh">
+                <ion-col size="12">
+                    <ion-label>
+                    <p>Data not found for this ticker</p>
+                    </ion-label>
+                </ion-col>
+                </ion-row>
+
+                <ion-row>
+                  <ion-col size="10">
+                    <ion-label style="font-size:12pt;font-color:#464646">
+                    <b><p> Growth indicators</p></b>
+                    </ion-label>
+                  </ion-col>
+                  <ion-col size="2" style="font-size:14pt;font-color:#464646">
+                  <b>  <ion-icon name="ios-arrow-forward" style="float:right;"></ion-icon></b>
+                  </ion-col>
+                </ion-row>
+                <ion-row *ngIf="this.companyFinancials.bookValueShareGrowth5Y">
+                <ion-col size="8" *ngIf="this.companyFinancials.bookValueShareGrowth5Y">
+                    <ion-label>
+                    <p> 5Y Book value per share growth</p>
+                    </ion-label>
+                  </ion-col>
+                  <ion-col size="4" *ngIf="this.companyFinancials.bookValueShareGrowth5Y">
+                    <ion-label>
+                    <p>:&nbsp; {{companyFinancials.bookValueShareGrowth5Y | number:'1.2'}}%</p>
+                    </ion-label>
+                  </ion-col>
+                  <ion-col size="8" *ngIf="this.companyFinancials.dividendGrowthRate5Y">
+                      <ion-label>
+                      <p> 5Y Dividend growth rate :</p>
+                      </ion-label>
+                  </ion-col>
+                  <ion-col size="4" *ngIf="this.companyFinancials.dividendGrowthRate5Y">
+                    <ion-label>
+                      <p>:&nbsp; {{companyFinancials.dividendGrowthRate5Y | number:'1.2'}}%</p>
+                     </ion-label>
+                  </ion-col>
+                  <ion-col size="8" *ngIf="this.companyFinancials.epsGrowth5Y">
+                      <ion-label>
+                      <p> EPS growth 5 year  :</p>
+                      </ion-label>
+                  </ion-col>
+                  <ion-col size="4" *ngIf="this.companyFinancials.epsGrowth5Y">
+                    <ion-label>
+                      <p>:&nbsp; {{companyFinancials.epsGrowth5Y | number:'1.2'}}%</p>
+                     </ion-label>
+                  </ion-col>
+                  <ion-col size="8" *ngIf="this.companyFinancials.epsGrowth3Y">
+                      <ion-label>
+                      <p> EPS growth 3 year  :</p>
+                      </ion-label>
+                  </ion-col>
+                  <ion-col size="4" *ngIf="this.companyFinancials.epsGrowth3Y">
+                    <ion-label>
+                      <p>:&nbsp; {{companyFinancials.epsGrowth3Y | number:'1.2'}}%</p>
+                     </ion-label>
+                  </ion-col>
+                  <ion-col size="8" *ngIf="this.companyFinancials.epsGrowthQuarterlyYoy">
+                      <ion-label>
+                      <p> EPS growth Quarterly YOY  :</p>
+                      </ion-label>
+                  </ion-col>
+                  <ion-col size="4" *ngIf="this.companyFinancials.epsGrowthQuarterlyYoy">
+                    <ion-label>
+                      <p>:&nbsp; {{companyFinancials.epsGrowthQuarterlyYoy | number:'1.2'}}%</p>
+                     </ion-label>
+                  </ion-col>
+                  <ion-col size="8" *ngIf="this.companyFinancials.epsGrowthTTMYoy">
+                      <ion-label>
+                      <p> EPS growth TTM YOY  :</p>
+                      </ion-label>
+                  </ion-col>
+                  <ion-col size="4" *ngIf="this.companyFinancials.epsGrowthTTMYoy">
+                    <ion-label>
+                      <p>:&nbsp; {{companyFinancials.epsGrowthTTMYoy | number:'1.2'}}%</p>
+                     </ion-label>
+                  </ion-col>
+
+                  <ion-col size="8" *ngIf="this.companyFinancials.revenueGrowth5Y">
+                      <ion-label>
+                      <p> Revenue growth 5Y  :</p>
+                      </ion-label>
+                  </ion-col>
+                  <ion-col size="4" *ngIf="this.companyFinancials.revenueGrowth5Y">
+                    <ion-label>
+                      <p>:&nbsp; {{companyFinancials.revenueGrowth5Y | number:'1.2'}}%</p>
+                     </ion-label>
+                  </ion-col>
+
+                  <ion-col size="8" *ngIf="this.companyFinancials.revenueGrowth3Y">
+                      <ion-label>
+                      <p> Revenue growth 3Y  :</p>
+                      </ion-label>
+                  </ion-col>
+                  <ion-col size="4" *ngIf="this.companyFinancials.revenueGrowth3Y">
+                    <ion-label>
+                      <p>:&nbsp; {{companyFinancials.revenueGrowth3Y | number:'1.2'}}%</p>
+                     </ion-label>
+                  </ion-col>
+
+                  <ion-col size="8" *ngIf="this.companyFinancials.revenueGrowthQuarterlyYoy">
+                      <ion-label>
+                      <p> Revenue growth Quarterly YOY  :</p>
+                      </ion-label>
+                  </ion-col>
+                  <ion-col size="4" *ngIf="this.companyFinancials.revenueGrowthQuarterlyYoy">
+                    <ion-label>
+                      <p>:&nbsp; {{companyFinancials.revenueGrowthQuarterlyYoy | number:'1.2'}}%</p>
+                     </ion-label>
+                  </ion-col>
+
+                  <ion-col size="8" *ngIf="this.companyFinancials.revenueShareGrowth5Y">
+                      <ion-label>
+                      <p> Revenue Share growth 5Y  :</p>
+                      </ion-label>
+                  </ion-col>
+                  <ion-col size="4" *ngIf="this.companyFinancials.revenueShareGrowth5Y">
+                    <ion-label>
+                      <p>:&nbsp; {{companyFinancials.revenueShareGrowth5Y | number:'1.2'}}%</p>
+                     </ion-label>
+                  </ion-col>
+                </ion-row>
+                <ion-row *ngIf="!this.companyFinancials.bookValueShareGrowth5Y">
+                <ion-col size="12">
+                    <ion-label>
+                    <p>Data not found for this ticker</p>
+                    </ion-label>
+                </ion-col>
+              </ion-row>
+
+          </ion-grid>
+        <!-- You can now use it in app.component.html -->
+
+
+        </ion-content>
+      </super-tab>
+
+
+
+      <super-tab>
+          <ion-content *ngIf="this.companyFinancials">
+            <ion-row>
+              <ion-col size="10">
+                <ion-label style="font-size:12pt;font-color:#464646">
+                <b><p> News Sentiments</p></b>
+                </ion-label>
+              </ion-col>
+              <ion-col size="2" style="font-size:14pt;font-color:#464646">
+              <b>  <ion-icon name="ios-arrow-forward" style="float:right;"></ion-icon></b>
+              </ion-col>
+            </ion-row>
+
+            <ion-row *ngIf="this.companyFinancials.articlesInLastWeek">
+            <ion-col size="6" *ngIf="this.companyFinancials.articlesInLastWeek">
+                <ion-label>
+                <p> Articles in last week</p>
+                </ion-label>
+              </ion-col>
+              <ion-col size="6" *ngIf="this.companyFinancials.articlesInLastWeek">
+                <ion-label>
+                <p>:&nbsp; {{companyFinancials.articlesInLastWeek}}</p>
+                </ion-label>
+              </ion-col>
+
+              <ion-col size="6" *ngIf="this.companyFinancials.weeklyAverage">
+                  <ion-label>
+                  <p> Weekly average</p>
+                  </ion-label>
+                </ion-col>
+                <ion-col size="6" *ngIf="this.companyFinancials.weeklyAverage">
+                  <ion-label>
+                  <p>:&nbsp; {{companyFinancials.weeklyAverage}}</p>
+                  </ion-label>
+                </ion-col>
+
+                <ion-col size="6" *ngIf="this.companyFinancials.companyNewsScore">
+                    <ion-label>
+                    <p> Company news score</p>
+                    </ion-label>
+                  </ion-col>
+                  <ion-col size="6" *ngIf="this.companyFinancials.companyNewsScore">
+                    <ion-label>
+                    <p>:&nbsp; {{companyFinancials.companyNewsScore| number:'1.2'}}</p>
+                    </ion-label>
+                  </ion-col>
+                </ion-row>
+                <ion-row *ngIf="!this.companyFinancials.articlesInLastWeek">
+                <ion-col size="12">
+                    <ion-label>
+                    <p>Data not found for this ticker</p>
+                    </ion-label>
+                </ion-col>
+                </ion-row>
+
+                <ion-row>
+                  <ion-col size="10">
+                    <ion-label style="font-size:12pt;font-color:#464646">
+                    <b><p> Sector bullishness ({{industry}})</p></b>
+                    </ion-label>
+                  </ion-col>
+                  <ion-col size="2" style="font-size:14pt;font-color:#464646">
+                  <b>  <ion-icon name="ios-arrow-forward" style="float:right;"></ion-icon></b>
+                  </ion-col>
+                </ion-row>
+
+                <ion-row style="text-align:center;" *ngIf="this.companyFinancials.sectorAverageBullishPercent">
+                <ion-col size="12" *ngIf="this.companyFinancials.sectorAverageBullishPercent">
+                  <circle-progress
+                                  [percent]="this.companyFinancials.sectorAverageBullishPercent"
+                                  [radius]="50"
+                                  [outerStrokeWidth]="5"
+                                  [innerStrokeWidth]="4"
+                                  [outerStrokeColor]="'#78C000'"
+                                  [innerStrokeColor]="'#C7E596'"
+                                  [animation]="true"
+                                  [unitsFontSize] = "10"
+                                  [titleFontSize] = "14"
+                                  [animationDuration]="300"
+                                  [showSubtitle] = "false"
+                                  [subtitleFormat] = "formatSubtitle"
+                                  [subtitleFontSize] = "8"
+                                  [responsive] = "false"
+
+                                ></circle-progress>
+
+                </ion-col>
+              </ion-row>
+
+              <ion-row *ngIf="!this.companyFinancials.sectorAverageBullishPercent">
+<ion-col size="12">
+    <ion-label>
+    <p>Data not found for this ticker</p>
+    </ion-label>
+</ion-col>
+</ion-row>
+
+
+              <ion-row>
+                <ion-col size="10">
+                  <ion-label style="font-size:12pt;font-color:#464646">
+                  <b><p> Bullish/Bearish based on news sentiments</p></b>
+                  </ion-label>
+                </ion-col>
+                <ion-col size="2" style="font-size:14pt;font-color:#464646">
+                <b>  <ion-icon name="ios-arrow-forward" style="float:right;"></ion-icon></b>
+                </ion-col>
+              </ion-row>
+
+              <ion-row *ngIf="this.companyFinancials.bullishPercent">
+                <ion-col size="6" *ngIf="this.companyFinancials.bullishPercent">
+                                    <circle-progress
+                      [percent]="this.companyFinancials.bullishPercent"
+                      [radius]="50"
+                      [outerStrokeWidth]="5"
+                      [innerStrokeWidth]="4"
+                      [outerStrokeColor]="'#78C000'"
+                      [innerStrokeColor]="'#C7E596'"
+                      [animation]="true"
+                      [unitsFontSize] = "10"
+                      [titleFontSize] = "14"
+                      [animationDuration]="300"
+                      [showSubtitle] = "false"
+                      [subtitleFormat] = "formatSubtitle"
+                      [subtitleFontSize] = "8"
+                      [responsive] = "false"
+
+                    ></circle-progress>
+
+              </ion-col>
+
+              <ion-col size="6" *ngIf="this.companyFinancials.bearishPercent">
+                                  <circle-progress
+                    [percent]="this.companyFinancials.bearishPercent"
+                    [radius]="50"
+                    [outerStrokeWidth]="5"
+                    [innerStrokeWidth]="4"
+                    [outerStrokeColor]="'#F83B13'"
+                    [innerStrokeColor]="'#FACBC1'"
+                    [animation]="true"
+                    [unitsFontSize] = "10"
+                    [titleFontSize] = "14"
+                    [animationDuration]="300"
+                    [showSubtitle] = "false"
+                    [subtitleFormat] = "formatSubtitle"
+                    [subtitleFontSize] = "8"
+                    [responsive] = "false"
+
+                  ></circle-progress>
+
+            </ion-col>
+
+            </ion-row>
+
+            <ion-row *ngIf="!this.companyFinancials.bullishPercent">
+<ion-col size="12">
+    <ion-label>
+    <p>Data not found for this ticker</p>
+    </ion-label>
+</ion-col>
+</ion-row>
+  </ion-content>
+      </super-tab>
+
+<!--
+      <super-tab>
+<ion-content>
+  <circle-progress
+    [percent]="85"
+    [radius]="40"
+    [outerStrokeWidth]="5"
+    [innerStrokeWidth]="4"
+    [outerStrokeColor]="'#78C000'"
+    [innerStrokeColor]="'#C7E596'"
+    [animation]="true"
+    [unitsFontSize] = "10"
+    [titleFontSize] = "14"
+    [animationDuration]="300"
+    [showSubtitle] = "true"
+    [subtitleFormat] = "formatSubtitle"
+    [subtitleFontSize] = "12"
+    [responsive] = "false"
+
+  ></circle-progress>
+
+</ion-content>
+
+</super-tab>
+-->
+    </super-tabs-container>
+</super-tabs>
+
+
+
+</ion-content>

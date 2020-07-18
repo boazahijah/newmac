@@ -1,0 +1,51 @@
+
+
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+        <ion-back-button></ion-back-button>
+     </ion-buttons>
+    <ion-searchbar animated placeholder="search your favourite song" [(ngModel)]="songchars"
+    (ngModelChange)="onKeyPress($event)" value="{{songchars}}"></ion-searchbar>
+
+  <!--  <ion-buttons slot="start">
+       <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>SongList</ion-title> -->
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+
+  <ion-list>
+    <ion-item color="tertiary" lines="none">
+      <ion-label class="ion-text-wrap message">
+        <ion-icon name="ios-leaf"></ion-icon>
+        Press and hold, to add/remove a song,to your favorites and access it offline.
+        </ion-label>
+    </ion-item>
+    <ion-list-header>
+    Songs List
+    </ion-list-header>
+
+      <ion-item *ngFor="let item of songList;let i = index;" (press)="addRemoveFavourites(i)"  (click)="navigateToSongList(item.songName)">
+        <ion-avatar slot="start">
+  <img src="assets/img/songlisticon.png"/>
+</ion-avatar>
+<ion-icon name="ios-leaf" slot="end" color="secondary" *ngIf=item.isFavorite></ion-icon>
+
+  <ion-label>
+              <h2>{{item.songName}}</h2>
+              <h3>{{item.movieName}}</h3>
+              <p>{{item.songKey}}</p>
+            </ion-label>
+        </ion-item>
+  </ion-list>
+
+  <ion-infinite-scroll threshold="100px" (ionInfinite)="loadData($event)">
+    <ion-infinite-scroll-content
+      loadingSpinner="crescent" color="primary"
+      loadingText="Loading more songs...">
+    </ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+</ion-content>

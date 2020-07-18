@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "184608001632",
+    "firebase_url": "https://zacksbuyalerts.firebaseio.com",
+    "project_id": "zacksbuyalerts",
+    "storage_bucket": "zacksbuyalerts.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:184608001632:android:a5fd8df2b85355ae5cfd05",
+        "android_client_info": {
+          "package_name": "com.app.zacksbuyalerts"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "184608001632-8vf3shpt4b67dib08c8c5is26u5bfgqt.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBOWqhhcHsJmYrQMpxf8kz-EsiQZNV6hnY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "184608001632-8vf3shpt4b67dib08c8c5is26u5bfgqt.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

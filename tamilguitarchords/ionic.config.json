@@ -1,0 +1,7 @@
+{
+  "name": "ionic4App-tabsAndMenu",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "angular"
+}

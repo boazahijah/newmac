@@ -1,0 +1,75 @@
+<ion-header translucent>
+  <ion-toolbar color="primary">
+    <ion-title>Filter criterias</ion-title>
+    <ion-buttons slot="start">
+      <ion-button (click)="closeModal()">Close</ion-button>
+    </ion-buttons>
+
+    <ion-buttons slot="end">
+      <ion-button (click)="dismissModal()">Update</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list>
+  <ion-list-header>
+    <ion-label>
+      Select your filter criterias
+   </ion-label>
+  </ion-list-header>
+
+  <ion-item>
+    <ion-label>Zacks Ranks</ion-label>
+    <ion-select [(ngModel)]="selectedZacksRank" [selectedText]="selectedZacksRank" name="rank" placeholder="Select Rank" multiple="true" cancelText="Nah" okText="Okay!">
+      <ion-select-option value="Strong Buy">Strong Buy</ion-select-option>
+      <ion-select-option value="Buy">Buy</ion-select-option>
+      <ion-select-option value="Hold">Hold</ion-select-option>
+      <ion-select-option value="Sell">Sell</ion-select-option>
+      <ion-select-option value="Strong Sell">Strong Sell</ion-select-option>
+    </ion-select>
+  </ion-item>
+
+  <ion-item>
+    <ion-label>Industry</ion-label>
+    <ion-select [(ngModel)]="selectedIndustry" name="industry" [selectedText]="selectedIndustry" placeholder="Select business sector" multiple="true" cancelText="Nah" okText="Okay!">
+      <ion-select-option value="{{ind.industryName}}" *ngFor="let ind of industryNames">{{ind.industryName}}</ion-select-option>
+    </ion-select>
+  </ion-item>
+</ion-list>
+<ion-list>
+
+  <ion-item>
+    <ion-label>Stock price</ion-label>
+    <ion-list radio-group >
+      <ion-radio-group [(ngModel)]="priceRange">
+
+      <ion-item>
+        <ion-label>All </ion-label>
+        <ion-radio value="0"></ion-radio>
+      </ion-item>
+      <ion-item>
+        <ion-label>Price between $0 to $1 </ion-label>
+        <ion-radio value="1"></ion-radio>
+      </ion-item>
+      <ion-item>
+        <ion-label>Price between $1 to $5 </ion-label>
+        <ion-radio value="2"></ion-radio>
+      </ion-item>
+      <ion-item>
+        <ion-label>Price between $5 to $10 </ion-label>
+        <ion-radio value="3"></ion-radio>
+      </ion-item>
+      <ion-item>
+        <ion-label>Price above $10 </ion-label>
+        <ion-radio value="4"></ion-radio>
+      </ion-item>
+    </ion-radio-group>
+
+    </ion-list>
+    </ion-item>
+
+  </ion-list>
+
+
+</ion-content>

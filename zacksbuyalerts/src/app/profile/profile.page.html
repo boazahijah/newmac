@@ -1,0 +1,44 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+       <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>User profile</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-content fullscreen>
+    <ion-list lines="full" class="ion-no-margin ion-no-padding">
+      <ion-list-header>
+        <ion-label>Please enter the required details.</ion-label>
+      </ion-list-header>
+
+  <ion-item>
+    <ion-label position="stacked">User name</ion-label>
+    <ion-input placeholder="enter user name" [(ngModel)]="username"></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label position="stacked">Email-id</ion-label>
+    <ion-input placeholder="enter email id" [(ngModel)]="emailid"></ion-input>
+  </ion-item>
+
+  <ion-radio-group [(ngModel)]="gender">
+  <ion-list-header>
+    <ion-label>Gender</ion-label>
+  </ion-list-header>
+
+  <ion-item>
+    <ion-label>Male</ion-label>
+    <ion-radio slot="start" value="male" ></ion-radio>
+  </ion-item>
+  <ion-item>
+    <ion-label>Female</ion-label>
+    <ion-radio slot="start" value="female"></ion-radio>
+  </ion-item>
+</ion-radio-group>
+</ion-list>
+<div class="ion-padding">
+  <ion-button expand="block"  class="ion-no-margin" (click)="updateProfile();">Update profile</ion-button>
+</div>
+</ion-content>

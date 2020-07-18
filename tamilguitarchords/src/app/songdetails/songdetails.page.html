@@ -1,0 +1,328 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+       <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-buttons slot="end" (click)="navigateToHome();">
+      <ion-icon name="home" class="larger" ></ion-icon>
+    </ion-buttons>
+    <ion-title>Song Lyrics / Chords / Videos </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="customfontsize" no-bounce>
+  <super-tabs (tabChange)="onTabChange($event)">
+    <super-tabs-toolbar slot="top">
+      <super-tab-button>
+        <ion-label>Lyrics</ion-label>
+      </super-tab-button>
+      <super-tab-button>
+        <ion-label>Chords</ion-label>
+      </super-tab-button>
+      <super-tab-button>
+        <ion-label>Videos</ion-label>
+      </super-tab-button>
+      <super-tab-button>
+        <ion-label>Chats({{commentsCount}})</ion-label>
+      </super-tab-button>
+  </super-tabs-toolbar>
+    <super-tabs-container>
+      <super-tab>
+        <ion-content>
+          <div class="roundedCorners">
+          <ion-grid>
+            <ion-row>
+              <ion-col>
+                <div class="boldChord">
+                  Song Name
+                </div>
+              </ion-col>
+              <ion-col>
+                <div>
+                  :&nbsp;&nbsp;{{songName}}
+                </div>
+              </ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col>
+                <div class="boldChord">
+                  Song Key
+                </div>
+              </ion-col>
+              <ion-col>
+                <div>
+                  :&nbsp;&nbsp;{{songkey}}
+                </div>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+</div>
+<div class="roundedCorners">
+
+          <ion-grid ng-if="tips != null &&  tips != undefined">
+            <ion-row>
+              <ion-col class="boldChord">
+                <ion-icon  md="ios-bulb"></ion-icon>
+                Tips to play :
+              </ion-col>
+            </ion-row>
+            <ion-row *ngFor="let tip of tips; let i = index;">
+              <ion-col>
+              <i> {{i + 1}} , {{tip.tip}} </i>
+             </ion-col>
+            </ion-row>
+          </ion-grid>
+</div>
+
+<!-- Lyrics -->
+<div class="roundedCornersBody">
+
+<ion-grid>
+<ion-row>
+<ion-col class="boldChord">
+  <ion-icon name="book"></ion-icon>
+Lyrics :
+</ion-col>
+</ion-row>
+
+<div ng-if="pallavi != null &&  pallavi != undefined">
+<ion-row *ngFor="let line of pallavi">
+<ion-col class="spaceBetweenRows customfontsize">
+  <div [innerHTML] = " line ">
+</div>
+
+</ion-col>
+</ion-row>
+</div>
+
+<ion-row>
+<ion-col class="spaceBetweenRows">
+&nbsp;
+</ion-col>
+</ion-row>
+
+
+<div ng-if="saranam != null &&  saranam != undefined">
+<ion-row *ngFor="let line of saranam">
+<ion-col class="spaceBetweenRows customfontsize">
+  <div [innerHTML] = " line "> </div>
+</ion-col>
+</ion-row>
+</div>
+
+
+</ion-grid>
+</div>
+        </ion-content>
+      </super-tab>
+      <super-tab>
+        <ion-content>
+<ion-list>
+  <ion-item color="tertiary" lines="none">
+    <ion-label class="ion-text-wrap message">
+      <ion-icon name="md-albums"></ion-icon>
+      List of chords,  that are used in this song.
+      </ion-label>
+</ion-item>
+  <ion-item *ngFor="let chord of chordDetails">
+    <ion-card class="fixedCardSize">
+      <ion-card-header color="tertiary">
+        <ion-card-title>{{chord.chordname}}</ion-card-title>
+      </ion-card-header>
+      <img src="{{chord.imageData}}"/>
+    </ion-card>
+  </ion-item>
+
+</ion-list>
+        </ion-content>
+      </super-tab>
+
+
+
+      <super-tab>
+          <ion-content>
+          <ion-list>
+            <ion-item color="tertiary" lines="none">
+              <ion-label class="ion-text-wrap message">
+                <ion-icon name="videocam"></ion-icon>
+                 List of youtube videos that can help you play this song.
+              </ion-label>
+            </ion-item>
+            <ion-item *ngFor="let video of videoDetails" (click)="openYoutubeVideo(video.videoid)">
+              <ion-thumbnail slot="start">
+                <img src="https://img.youtube.com/vi/{{video.videoid}}/1.jpg">
+              </ion-thumbnail>
+              <ion-label>
+                <h3>{{video.videotitle}}</h3>
+              </ion-label>
+            </ion-item>
+          </ion-list>
+
+
+          </ion-content>
+      </super-tab>
+
+
+      <super-tab>
+<ion-content>
+  <!-- example blog post-->
+    <!--  <h1 text-center> Interesting Article</h1>
+      <p>
+        Once you're done creating the quality content, you still have the challenge of presenting it that clearly dictates what your blog is about. Images, text, and links need to be shown off just right -- otherwise, readers might abandon your content if it's not aesthetically showcased in a way that's both appealing and easy to follow. </p>
+        <div class="flex-items">
+            <ion-row>
+                <ion-col col-6>
+                      <h1 float-right>{{rating}} <ion-icon  name="arrow-round-up" style="color : #90EE90; font-size: 25px;"></ion-icon></h1>
+                </ion-col>
+                <ion-col col-6>
+                    <h1>{{rating}} <ion-icon name="arrow-round-down" style="color: #FF0000; font-size: 25px;"></ion-icon></h1>
+                </ion-col>
+              </ion-row>
+        </div> -->
+        <div *ngIf="username" class="comment-box" #commentboxid id="commentboxid">
+          <ion-content *ngIf="comments.length != 0">
+          <ion-card *ngFor="let comment of comments" style="border-radius:10px;">
+
+            <ion-card-content>
+              <ion-grid>
+                <ion-row>
+              <!--  <ion-col size="3">
+                  <ion-item lines="none">
+                  <ion-avatar >
+                    <img src="assets/img/male.JPG"/>
+                  </ion-avatar>
+                </ion-item>
+                </ion-col>-->
+                <ion-col size="13">
+                  <div style="float:left;"> <h2 class="commentmessage"><strong>{{comment.username}}</strong></h2></div>
+                  <div style="float:right;font-size:16pt;padding-right:2%;" *ngIf="comment.username == username">
+                   <ion-icon ios="ios-trash" md="md-trash" (click)="deleteComment(comment._id);"></ion-icon>
+                 </div>
+                  <br>
+                  <div *ngIf="comment.type == 'image'">
+                    <!--  <img src="{{img.imageComment}}" class="thumb-img"/> -->
+<!--                      <ion-img *ngFor="let img of comment['imageData']"
+                        ionImgViewer
+                        title="Image"
+                        text=""
+                        scheme="dark"
+                        src="{{img.imageComment}}" (click)="openViewer(img.imageComment);" class="imgRoundedCorners">
+                      </ion-img> -->
+                      <ion-grid>
+                        <ion-row>
+                          <ion-col *ngFor="let img of comment['imageData']" size="6">
+                              <img scheme="dark" src={{img.imageComment}} ionImgViewer class="profilePicture" (click)="openViewer(img.imageComment);" class="imgRoundedCorners"/>
+                          </ion-col>
+                        </ion-row>
+                        <h5 style="float:right;">{{comment.lastUpdatedDesc}}</h5>
+                      </ion-grid>
+
+
+                </div>
+                <div *ngIf="comment.type == 'text'">
+                  <h3 class="commentmessage" style="float:left;">{{comment.data}}</h3> <h5 style="float:right;padding-right:2%;">{{comment.lastUpdatedDesc}}</h5>
+                </div>
+
+
+                </ion-col>
+              </ion-row>
+              </ion-grid>
+
+
+            </ion-card-content>
+
+          </ion-card>
+          <ion-infinite-scroll threshold="200px" (ionInfinite)="loadData($event)">
+            <ion-infinite-scroll-content
+              loadingSpinner="crescent" color="primary"
+              loadingText="Loading older comments...">
+            </ion-infinite-scroll-content>
+          </ion-infinite-scroll>
+</ion-content>
+<ion-content *ngIf="comments.length == 0">
+  <div style="margin-top:50%;margin-left:0%;">
+    <ion-card style="border-radius:10px;" color="tertiary">
+      <ion-card-content>
+        <ion-icon name="chatboxes"></ion-icon>
+  No Comments found. Be the first to share your thoughts on this song.
+      </ion-card-content>
+    </ion-card>
+</div>
+</ion-content>
+        </div>
+
+          <div style="margin-top:50%;margin-left:0%;" *ngIf="!username">
+            <ion-card style="border-radius:10px;" color="warning">
+              <ion-card-content>
+                <ion-grid>
+                  <ion-row>
+                    <ion-col size="2">
+                      <ion-icon style="font-size:35pt;" ios="ios-information-circle" md="md-information-circle"></ion-icon>
+
+                    </ion-col>
+                        <ion-col size="10">
+                          <strong>Your profile details are incomplete. Please update your profile to use this section.</strong>
+
+                        </ion-col>
+                  </ion-row>
+                  </ion-grid>
+              </ion-card-content>
+            </ion-card>
+          </div>
+      <ion-footer padding *ngIf="username">
+        <ion-grid>
+        <ion-row>
+          <ion-col size="10">
+        <ion-textarea [(ngModel)]="comment" type="text" placeholder="Comment .... "></ion-textarea>
+        </ion-col>
+        <ion-col size="1">
+        <ion-icon ios="ios-send"  md="md-send" color="secondary" style="font-size:150%;" (click)="postComment();"></ion-icon>
+      </ion-col>
+        <ion-col size="1">
+        <ion-icon ios="ios-image" md="md-image"  color="secondary" style="font-size:150%;" (click)="selectImage();"></ion-icon>
+      </ion-col>
+      </ion-row>
+    </ion-grid>
+      </ion-footer>
+  <!--
+<div style="height:80%; position: absolute;">
+<ion-list>
+  <ion-item *ngFor="let com of comments;let i = index;">
+<ion-avatar slot="start">
+<img src="assets/img/songlisticon.png"/>
+</ion-avatar>
+<ion-label>
+          <h2>{{com.username}}</h2>
+          <h3>{{com.data}}</h3>
+        </ion-label>
+</ion-item>
+</ion-list>
+</div>
+<div style="position:fixed;padding-top:130%;">
+  <ion-list>
+<ion-item *ngIf="isForumPage">
+    <ion-label position="stacked">Post</ion-label>
+    <ion-textarea [(ngModel)]="comment">
+    </ion-textarea>
+    <ion-icon ios="ios-send" slot="end" md="md-send" color="secondary" style="font-size:150%;" (click)="postComment();"></ion-icon>
+    &nbsp;&nbsp;&nbsp;
+    <ion-icon ios="ios-image" md="md-image" slot="end" color="secondary" style="font-size:150%;"></ion-icon>
+
+  </ion-item>
+</ion-list>
+</div>
+-->
+<!--<ion-footer  >
+<ion-toolbar>
+
+</ion-toolbar>
+</ion-footer>
+-->
+</ion-content>
+</super-tab>
+    </super-tabs-container>
+</super-tabs>
+
+
+
+</ion-content>

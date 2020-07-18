@@ -1,0 +1,26 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+       <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>Request a song</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-content fullscreen>
+    <ion-list lines="full" class="ion-no-margin ion-no-padding">
+
+  <ion-item>
+    <ion-label position="stacked">Song name</ion-label>
+    <ion-input placeholder="enter song name" [(ngModel)]="songName"></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label position="stacked">Movie name</ion-label>
+    <ion-input placeholder="enter movie name" [(ngModel)]="movieName"></ion-input>
+  </ion-item>
+</ion-list>
+<div class="ion-padding">
+  <ion-button expand="block"  class="ion-no-margin" (click)="processForm();">Send Request</ion-button>
+</div>
+</ion-content>

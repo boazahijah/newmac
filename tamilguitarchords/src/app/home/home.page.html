@@ -1,0 +1,140 @@
+<!--<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>HOME</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+    Details Page forward
+</ion-content> -->
+
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>HOME</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="card-background-page">
+  <div *ngIf="tamilSongsBanner || tamilSongsBanner.length > 0">
+
+<ion-slides *ngIf="tamilSongsBanner || tamilSongsBanner.length > 0" [options]="slideOptions" pager="true" #slider (ionSlidesDidLoad)="slidesDidLoad(slider)" >
+   <ion-slide *ngFor="let p of tamilSongsBanner" >
+    <ion-card  (click)="navigateToSongList(p.languagename)" routerDirection="root">
+   <img src={{p.imageData}}/>
+   <div class="card-title">{{p.languagename}}</div>
+   <div class="card-subtitle">( {{p.count}} Songs )</div>
+ </ion-card>
+   </ion-slide>
+</ion-slides>
+
+<ion-slides *ngIf="tamilSongsBanner || tamilSongsBanner.length > 0" [options]="slideOptions" pager="true" #slidersonglist (ionSlidesDidLoad)="slidesDidLoad(slidersonglist)">
+   <ion-slide >
+     <ion-card >
+   <ion-card-content>
+
+<ion-list>
+  <ion-item lines="none">
+<ion-label class="ion-text-wrap message-head">New tamil songs entries
+</ion-label>
+</ion-item>
+
+
+    <ion-item *ngFor="let item of tamilLatestAdditions;let i = index;" (click)="navigateToSongDetails(item.songName);">
+      <ion-label>
+            <h2 class="message-songname">{{item.songName}}</h2>
+      </ion-label>
+      <span slot="end" class="message">{{item.lastUpdatedDesc}}</span>
+      </ion-item>
+      <ion-item lines="none" (click)="navigateToSongList('Tamil Songs');">
+        <ion-label >
+              <h2 class="more" slot="end" >tap here to view more ...</h2>
+        </ion-label>
+      </ion-item>
+</ion-list>
+</ion-card-content>
+</ion-card>
+</ion-slide>
+
+</ion-slides>
+
+
+<ion-slides *ngIf="tamilSongsBanner || tamilSongsBanner.length > 0" [options]="slideOptions" pager="true" #slidersonghitslist (ionSlidesDidLoad)="slidesDidLoad(slidersonghitslist)">
+   <ion-slide >
+     <ion-card >
+   <ion-card-content>
+<ion-list>
+  <ion-item lines="none">
+<ion-label class="ion-text-wrap message-head">Most viewed tamil songs
+</ion-label>
+</ion-item>
+
+
+    <ion-item *ngFor="let item of tamilMostHits;let i = index;" (click)="navigateToSongDetails(item.songname);">
+      <ion-label>
+            <h2 class="message-songname">{{item.songname}}</h2>
+      </ion-label>
+      <span slot="end" class="message">{{item.hits}} views</span>
+      </ion-item>
+      <ion-item lines="none" (click)="navigateToSongList('Tamil Songs');">
+        <ion-label >
+              <h2 class="more" slot="end" >tap here to view more ...</h2>
+        </ion-label>
+      </ion-item>
+</ion-list>
+</ion-card-content>
+</ion-card>
+</ion-slide>
+
+</ion-slides>
+</div>
+<ion-grid>
+<!--  <div *ngIf="languages || languages.length > 0">
+    <ion-row >
+    <ion-col class="boldChord"  *ngFor="let p of languages" size = "6">
+      <ion-card  (click)="navigateToSongList(p.languagename)" routerDirection="root">
+    <img src={{p.imageData}}/>
+    <div class="card-title">{{p.languagename}}</div>
+  </ion-card>
+</ion-col>
+</ion-row>
+</div> -->
+<div *ngIf="!languages || languages.length === 0">
+  <ion-list style="margin-top:50%;">
+    <ion-item color="danger" lines="none">
+      <ion-label class="ion-text-wrap message">
+        <ion-icon name="ios-wifi"></ion-icon>
+        Some problem occured. Please check your internet connectivity.
+      </ion-label>
+    </ion-item>
+</ion-list>
+</div>
+<ion-row>
+<ion-col size = "12">
+  <ion-list>
+    <ion-item lines="none">
+  <ion-thumbnail slot="start">
+    <img src="assets/img/plant.png"/>
+  </ion-thumbnail>
+  <ion-label class="ion-text-wrap message">The creation of a thousand forests is in one acorn.
+  "  ― Ralph Waldo Emerson"
+  </ion-label>
+</ion-item>
+</ion-list>
+
+</ion-col>
+
+</ion-row>
+</ion-grid>
+</ion-content>
+
+
+<ion-list>
+  <ion-item>
+  </ion-item>
+</ion-list>
